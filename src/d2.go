@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"strings"
 )
 
@@ -72,22 +71,18 @@ func countRunicWords3(input string) int {
 	n, m := len(matrix), len(matrix[0])
 
 	seen := make(map[Pair]struct{})
-	fmt.Println(matrix)
 
 	for _, word := range wordList {
 		for i := 0; i < n; i++ {
 			for j := 0; j < m; j++ {
 				cur := getHorizontalWord(matrix[i], len(word), j)
 				if cur == word || Reverse(cur) == word {
-					fmt.Printf("i: %d; j: %d\n", i, j)
-					fmt.Println(cur)
 					for k := 0; k < len(word); k++ {
 						if k+j < m {
 							seen[Pair{i, k + j}] = struct{}{}
 						} else {
 							seen[Pair{i, k + j - m}] = struct{}{}
 						}
-						fmt.Println(seen)
 					}
 				}
 			}
@@ -96,10 +91,7 @@ func countRunicWords3(input string) int {
 		for j := 0; j < m; j++ {
 			for i := 0; i < n; i++ {
 				cur := getVerticalWord(matrix, len(word), i, j)
-				// fmt.Printf("j: %d; i: %d\n", j, i)
 				if cur == word || Reverse(cur) == word {
-					// fmt.Printf("i: %d; j: %d\n", i, j)
-					fmt.Println(cur)
 					count := 0
 					k := i
 					for count != len(word) {
@@ -114,7 +106,6 @@ func countRunicWords3(input string) int {
 			}
 		}
 	}
-	fmt.Println(seen)
 
 	return len(seen)
 }
